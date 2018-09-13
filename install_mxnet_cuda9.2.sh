@@ -42,7 +42,7 @@ echo -e $TEXT_RESET
 
 
 apt install libnvrtc8.0
-pip install mxnet-cu80
+pip install mxnet-cu92mkl
 pip install gluoncv
 pip install mxboard
 echo -e $TEXT_YELLOW
