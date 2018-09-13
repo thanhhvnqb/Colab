@@ -3,6 +3,7 @@
 TEXT_RESET='\e[0m'
 TEXT_YELLOW='\e[1;33m'
 
+wget https://github.com/thanhhvnqb/Mxnet_colab/blob/master/mxnet_utils.py
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1710/x86_64/cuda-repo-ubuntu1710_9.2.148-1_amd64.deb
 echo -e $TEXT_YELLOW
 echo 'WEBGET finished..'
