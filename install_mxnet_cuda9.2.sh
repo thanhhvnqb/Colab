@@ -4,12 +4,12 @@ TEXT_RESET='\e[0m'
 TEXT_YELLOW='\e[1;33m'
 
 wget https://github.com/thanhhvnqb/Mxnet_colab/blob/master/mxnet_utils.py
-wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1710/x86_64/cuda-repo-ubuntu1710_9.2.148-1_amd64.deb
+https://developer.nvidia.com/compute/cuda/9.2/Prod2/local_installers/cuda-repo-ubuntu1710-9-2-local_9.2.148-1_amd64
 echo -e $TEXT_YELLOW
 echo 'WEBGET finished..'
 echo -e $TEXT_RESET
 
-dpkg -i cuda-repo-ubuntu1710_9.2.148-1_amd64.deb
+dpkg -i cuda-repo-ubuntu1710-9-2-local_9.2.148-1_amd64.deb
 echo -e $TEXT_YELLOW
 echo 'DPKG finished..'
 echo -e $TEXT_RESET
