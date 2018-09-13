@@ -9,7 +9,7 @@ echo -e $TEXT_YELLOW
 echo 'WEBGET finished..'
 echo -e $TEXT_RESET
 
-dpkg -i cuda-repo-ubuntu1710-9-2-local_9.2.148-1_amd64.deb
+dpkg -i cuda-repo-ubuntu1710-9-2-local_9.2.148-1_amd64
 echo -e $TEXT_YELLOW
 echo 'DPKG finished..'
 echo -e $TEXT_RESET
