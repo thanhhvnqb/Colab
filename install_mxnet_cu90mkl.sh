@@ -44,7 +44,7 @@ echo -e $TEXT_RESET
 
 
 apt install libnvrtc8.0
-pip install mxnet-cu90mkl
+pip install mxnet-cu90mkl==1.2.1
 pip install gluoncv
 pip install mxboard
 echo -e $TEXT_YELLOW
