@@ -16,7 +16,7 @@ echo -e $TEXT_YELLOW
 echo 'DPKG finished..'
 echo -e $TEXT_RESET
 
-apt-key add /var/cuda-repo-9-2-local/7fa2af80.pub
+apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
 echo -e $TEXT_YELLOW
 echo 'APT added key..'
 echo -e $TEXT_RESET
