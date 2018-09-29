@@ -26,7 +26,9 @@ echo -e $TEXT_YELLOW
 echo 'APT update finished..'
 echo -e $TEXT_RESET
 
-apt-get install cuda
+echo -e $TEXT_YELLOW
+echo 'APT start installing cuda..'
+apt-get install cuda > /dev/null
 echo -e $TEXT_YELLOW
 echo 'APT finished installing cuda..'
 
