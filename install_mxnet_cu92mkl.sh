@@ -14,7 +14,7 @@ echo 'The CUDA version is: '
 cat /usr/local/cuda/version.txt
 echo -e $TEXT_RESET
 
-apt-get install -y -qq software-properties-common python-software-properties module-init-tools
+apt-get install -y -qq software-properties-common module-init-tools
 add-apt-repository -y ppa:alessandro-strada/ppa 2>&1 > /dev/null
 apt-get update -qq 2>&1 > /dev/null
 apt-get -y install -qq google-drive-ocamlfuse fuse
@@ -23,7 +23,6 @@ echo 'APT finished installing drive connector..'
 echo -e $TEXT_RESET
 
 
-apt install libnvrtc8.0
 pip install mxnet-cu92mkl
 pip install gluoncv
 pip install mxboard
