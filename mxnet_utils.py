@@ -170,7 +170,7 @@ def count_param_gluon(hybridnet):
     for _, v in hybridnet.collect_params().items():
         temp = np.prod(v.shape)
         total_param += temp
-        print('%50s | %20s | %25s | %7d' % (v.name, str(v.shape), str(v.dtype), temp))
+        print('%50s | %20s | %25s | %7d' % (v.name[-50:], str(v.shape), str(v.dtype), temp))
 
     print('Total Param Count: %d' % total_param)
     
@@ -182,6 +182,6 @@ def count_param_module(arg_params):
     for k, v in arg_params.items():
         temp = np.prod(v.shape)
         total_param += temp
-        print('%50s | %20s | %25s | %7d' % (k, str(v.shape), str(v.dtype), temp))
+        print('%50s | %20s | %25s | %7d' % (k[-50:], str(v.shape), str(v.dtype), temp))
 
     print('Total Param Count: %d' % total_param)
