@@ -1,5 +1,6 @@
 import sys
 import time
+import re
 import collections
 import numpy as np
 
@@ -49,7 +50,7 @@ class Progbar(object):
         """
         values = values or []
         for k, v in values:
-            if k not in self.stateful_metrics:
+            if k in self.stateful_metrics:
                 if k not in self._values:
                     self._values[k] = [v * (current - self._seen_so_far),
                                        current - self._seen_so_far]
@@ -125,10 +126,11 @@ class Progbar(object):
                 if isinstance(self._values[k], list):
                     avg = np.mean(
                         self._values[k][0] / max(1, self._values[k][1]))
+                    avg = self._values[k][0] / max(1, self._values[k][1])
                     if abs(avg) > 1e-3:
                         info += ' %.4f' % avg
                     else:
-                        info += ' %.4e' % avg
+                        info += ' %.1e' % avg
                 else:
                     info += ' %s' % self._values[k]
 
@@ -161,27 +163,63 @@ class Progbar(object):
 
     def add(self, n, values=None):
         self.update(self._seen_so_far + n, values)
-        
-        
+
+
 def count_param_gluon(hybridnet):
     total_param = 0
-    print('%50s | %20s | %25s | %7s' % ('Name', 'shape (out, in, ker)', 'dtype', '#param'))
-    print(''.join(['-' for _ in range(112)]))
+    print('%50s | %20s | %15s | %6s' % ('Name', 'shape (o,i,k)', 'dtype', '#param'))
+    print(''.join(['-' for _ in range(100)]))
     for _, v in hybridnet.collect_params().items():
         temp = np.prod(v.shape)
         total_param += temp
-        print('%50s | %20s | %25s | %7d' % (v.name[-50:], str(v.shape), str(v.dtype), temp))
+        if len(v.name) > 50:
+            name = '...' + v.name[-47:]
+        else:
+            name = v.name
+        dtname = re.search("'(.*)'", str(v.dtype))
+        dtname = v.dtype if dtname is None else dtname.group(1)
+        print('%50s | %20s | %15s | %6d' % (name, str(v.shape), dtname, temp))
 
     print('Total Param Count: %d' % total_param)
-    
+
 
 def count_param_module(arg_params):
     total_param = 0
-    print('%50s | %20s | %25s | %7s' % ('Name', 'shape (out, in, ker)', 'dtype', '#param'))
-    print(''.join(['-' for _ in range(112)]))
-    for k, v in arg_params.items():
+    print('%50s | %20s | %15s | %6s' % ('Name', 'shape (o,i,k)', 'dtype', '#param'))
+    print(''.join(['-' for _ in range(100)]))
+    for k, v in hybridnet.collect_params().items():
         temp = np.prod(v.shape)
         total_param += temp
-        print('%50s | %20s | %25s | %7d' % (k[-50:], str(v.shape), str(v.dtype), temp))
+        if len(k) > 50:
+            name = '...' + k[-47:]
+        else:
+            name = k
+        dtname = re.search("'(.*)'", str(v.dtype))
+        dtname = v.dtype if dtname is None else dtname.group(1)
+        print('%50s | %20s | %15s | %6d' % (name, str(v.shape), dtname, temp))
 
     print('Total Param Count: %d' % total_param)
+
+
+def test_count_param():
+    from gluoncv.model_zoo import get_model
+    kwargs = {'classes': 10}
+    model_name = "cifar_resnet20_v1"
+    net = get_model(model_name, **kwargs)
+    net.hybridize()
+    count_param_gluon(net)
+
+def test_probar():
+    import time
+    tloss = 0
+    progbar = Progbar(target=100, prefix='Train - ', stateful_metrics=['loss'])
+    for i in range(100):
+        loss = np.random.rand()
+        tloss += loss
+        progbar.update(i + 1, [['loss', loss]])
+        time.sleep(0.05)
+    print(tloss/100)
+if __name__ == '__main__':
+    # test_count_param()
+    test_probar()
+    pass
