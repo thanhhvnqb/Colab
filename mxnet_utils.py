@@ -187,7 +187,7 @@ def count_param_module(arg_params):
     total_param = 0
     print('%50s | %20s | %15s | %6s' % ('Name', 'shape (o,i,k)', 'dtype', '#param'))
     print(''.join(['-' for _ in range(100)]))
-    for k, v in hybridnet.collect_params().items():
+    for k, v in arg_params.items():
         temp = np.prod(v.shape)
         total_param += temp
         if len(k) > 50:
