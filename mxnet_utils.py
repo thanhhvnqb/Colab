@@ -181,6 +181,7 @@ def count_param_gluon(hybridnet):
         print('%50s | %20s | %15s | %6d' % (name, str(v.shape), dtname, temp))
 
     print('Total Param Count: %d' % total_param)
+    return total_param
 
 
 def count_param_module(arg_params):
@@ -199,6 +200,7 @@ def count_param_module(arg_params):
         print('%50s | %20s | %15s | %6d' % (name, str(v.shape), dtname, temp))
 
     print('Total Param Count: %d' % total_param)
+    return total_param
 
 
 def test_count_param():
