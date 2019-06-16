@@ -6,9 +6,6 @@ import re
 import logging
 import json
 
-from mxnet.symbol import Symbol
-from mxboard import SummaryWriter
-
 
 def makedir(directory):
     """Make directory."""
@@ -53,10 +50,7 @@ class Logger(object):
             self.logger.addHandler(streamhandler)
         self.logger.propagate = False
         if log_board:
-            self.logsw = SummaryWriter(logdir=os.path.join(out_dir, 'logs/'))
-        else:
-            self.logsw = None
-        self.log_comet = log_comet
+            makedir(os.path.join(out_dir, 'logs/'))
 
     def start(self, epoch, batch_size, max_step, lr):
         """Start Logger for new epoch."""
